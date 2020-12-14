@@ -1,3 +1,10 @@
+/*
+ * Najeebulla Hussaini
+ * 100596841
+ * 2020-12-13
+ * ASP.NET CORE WEB APPLICATION THAT HAS USER LOGIN/REGISTRATION WITH FALL BACK AUTHENTHICATION WITH PASSWORD RESET.
+ * THIS PROGRAM ALLOWS FOR CUSTOMER, PRODUCT, AND ORDER MANAGEMENT
+ */
 using ComputerShop.Data;
 using ComputerShop.Models;
 using Microsoft.AspNetCore.Builder;
@@ -5,6 +12,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -32,9 +40,14 @@ namespace ComputerShop
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.Configure<DataProtectionTokenProviderOptions>(opt =>
+            opt.TokenLifespan = TimeSpan.FromHours(2));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

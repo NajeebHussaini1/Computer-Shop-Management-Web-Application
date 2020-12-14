@@ -76,6 +76,7 @@ namespace ComputerShop.Controllers
         }
 
         // GET: Orders/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -96,6 +97,7 @@ namespace ComputerShop.Controllers
         // POST: Orders/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("orderID,orderNumber,productID,customerID")] Order order)

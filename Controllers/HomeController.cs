@@ -23,6 +23,12 @@ namespace ComputerShop.Controllers
             return View();
         }
 
+        //For google map feature in location 
+        public IActionResult Location()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
@@ -34,4 +40,5 @@ namespace ComputerShop.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
+
 }
